@@ -2,9 +2,9 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 
 
-async def print_log(message: types.Message, state: FSMContext):
+async def print_log(state: FSMContext):
     print('state data is: ', str(await state.get_data()))
-    await message.answer(str(await state.get_data()))
+    # await message.answer(str(await state.get_data()))
 
 
 async def make_pdf(state: FSMContext):

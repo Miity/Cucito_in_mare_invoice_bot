@@ -6,6 +6,7 @@ from states.create_pdf import Create_states
 
 from keyboards.default.keyboards import start_keyboard, add_invoice_keyboard
 
+from .utils import print_log
 
 
 
@@ -19,7 +20,8 @@ from keyboards.default.keyboards import start_keyboard, add_invoice_keyboard
 '''
 
 @dp.message_handler(text='create new invoice')
-async def start(message: types.Message):
+async def start(message: types.Message, state: FSMContext):
+    await print_log(state)
     await message.answer(text='Chose something from keyboard',reply_markup=add_invoice_keyboard)
     await Create_states.start.set()
 
@@ -27,13 +29,13 @@ async def start(message: types.Message):
 @dp.message_handler(state=Create_states.level_1)
 async def add_descript(message: types.Message,  state: FSMContext):
     await state.update_data(client = message.text)
-    await start(message)
+    await start(message, state)
 
 
 @dp.message_handler(state=Create_states.level_2)
 async def add_descript(message: types.Message,  state: FSMContext):
     await state.update_data(description = message.text)
-    await start(message)
+    await start(message, state)
 
 
 @dp.message_handler(state=Create_states.level_3)
@@ -65,4 +67,4 @@ async def add_price_row(message: types.Message,  state: FSMContext):
     data['objs'][-1]['price'] = price
     await state.update_data(objs = data['objs'])
 
-    await start(message)
+    await start(message, state)
