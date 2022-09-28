@@ -28,16 +28,17 @@ async def step_answer(message: types.Message,  state: FSMContext):
 
     elif message.text == 'save file':
         data = await state.get_data()
-        if 'objs' not in data or 'client' not in data or 'description' not in data:
-            await message.answer('need more info', reply_markup=types.ReplyKeyboardRemove())
-            await message.bot.get_updates()
+        try:
+            await message.answer('wait', reply_markup=types.ReplyKeyboardRemove())
+            from . import make_pdf
+            from loader import bot
+            file = await make_pdf(state)
+            await bot.send_document(message.chat.id,document=file)
             await start(message, state)
-        await message.answer('wait', reply_markup=types.ReplyKeyboardRemove())
-        from . import make_pdf
-        from loader import bot
-        file = await make_pdf(state)
-        await bot.send_document(message.chat.id,document=file)
-        await start(message, state)
+        except:
+            if 'objs' not in data or 'client' not in data or 'description' not in data:
+                await message.answer('need more info', reply_markup=types.ReplyKeyboardRemove())
+                await start(message, state)
 
     
     elif message.text == 'reset':
