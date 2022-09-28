@@ -27,6 +27,10 @@ async def step_answer(message: types.Message,  state: FSMContext):
         await start(message, state)
 
     elif message.text == 'save file':
+        data = state.get_data()
+        if 'objs' not in data or 'client' not in data or 'description' not in data:
+            await message.answer('need more info', reply_markup=types.ReplyKeyboardRemove())
+            await start(message, state)
         await message.answer('wait', reply_markup=types.ReplyKeyboardRemove())
         from . import make_pdf
         from loader import bot
