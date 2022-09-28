@@ -13,11 +13,14 @@ start_keyboard = ReplyKeyboardMarkup([
 who = KeyboardButton('A chi?')
 obj = KeyboardButton('describe object')
 add_obj = KeyboardButton('add_obj')
+show_saved_info = KeyboardButton('show saved info')
 save_file = KeyboardButton('save file')
+
 
 add_invoice_keyboard = ReplyKeyboardMarkup([
     [who, obj],
     [add_obj],
+    [show_saved_info],
     [save_file, reset]
 ],resize_keyboard=True, input_field_placeholder='chose button')
 

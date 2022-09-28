@@ -7,6 +7,23 @@ async def print_log(state: FSMContext):
     # await message.answer(str(await state.get_data()))
 
 
+async def show_price_info(message: types.Message, state: FSMContext):
+    data = await state.get_data()
+    if data == {} or data == None:
+        await message.answer("you didn't write any information, yet")
+    if 'client' in data:
+        await message.answer(data['client'])
+    if "description" in data:
+        await message.answer(data['description'])
+    if "objs" in data:
+        num = 1
+        txt = ''
+        for obj in data['objs']:
+            txt = txt + '{} {} | {} \n'.format(str(num), obj['txt'], obj['price'])
+            num += 1
+        await message.answer(txt)
+
+
 async def make_pdf(state: FSMContext):
     
     filename = 'file.pdf'
