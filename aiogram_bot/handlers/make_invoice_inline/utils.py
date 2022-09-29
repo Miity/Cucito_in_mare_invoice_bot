@@ -35,7 +35,7 @@ async def make_pdf(data):
     f.set_filename(data['name'])
     f.set_client_name(data['name'])
     f.set_client_adress(data['adress'])
-    f.set_oggetto(data['description'])
+    f.set_oggetto(data['oggetto'])
     f.print_price_list(data['products'])
     f.s_footer()
     f.output(f.filename)
