@@ -13,12 +13,12 @@ reset = InlineKeyboardButton(text = 'reset', callback_data='reset')
 # ])
 
 
-client_name = InlineKeyboardButton(text='name', callback_data='name')
-adress = InlineKeyboardButton(text='adress', callback_data='adress')
+client_name = InlineKeyboardButton(text='Nome', callback_data='name')
+adress = InlineKeyboardButton(text='indirizzo', callback_data='adress')
 oggetto = InlineKeyboardButton(text='oggetto', callback_data='oggetto')
-product = InlineKeyboardButton(text='product', callback_data='product')
-show_saved_info = InlineKeyboardButton(text='show saved info', callback_data='show saved info')
-save_file = InlineKeyboardButton(text='save file', callback_data='save file')
+product = InlineKeyboardButton(text='servizio', callback_data='product')
+show_saved_info = InlineKeyboardButton(text='mostra le informazioni memorizzate', callback_data='show saved info')
+save_file = InlineKeyboardButton(text='salva', callback_data='save file')
 
 
 add_inline_invoice_keyboard = InlineKeyboardMarkup(row_width=3)
