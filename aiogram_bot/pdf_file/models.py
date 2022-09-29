@@ -1,7 +1,9 @@
 import os
 from fpdf import FPDF
 from fpdf.enums import XPos,YPos
+
 import datetime
+from slugify import slugify
 
 
 class PDF(FPDF):
@@ -10,7 +12,12 @@ class PDF(FPDF):
     pdf_w=210
     pdf_h=297
     font="helvetica"
-    filename = 'file'
+    filename = 'file.pdf'
+
+    def set_filename(self, filename: str):
+        filename = slugify(filename)
+        filename += ".pdf"
+        self.filename = filename
 
     def lines(self):
         self.set_line_width(0.0)
