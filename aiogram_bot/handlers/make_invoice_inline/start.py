@@ -47,17 +47,16 @@ async def step_answer(callback: types.CallbackQuery, state: FSMContext):
             from .utils import make_pdf
             file = await make_pdf(data)
             await bot.send_document(callback.message.chat.id, document=file)
-            await start(callback.message, state)
+            await Create_states.start.set()
         except:
             if 'name' not in data or 'adress' not in data or 'description' not in data or 'products' not in data:
                 await callback.message.answer('need more info', reply_markup=types.ReplyKeyboardRemove())
-                await start(callback.message, state)
+                await Create_states.start.set()
 
     elif callback.data == 'reset':
         await state.finish()
         await callback.message.answer("Let's start again", reply_markup=types.ReplyKeyboardRemove())
-        from ..start import start_bot
-        await start_bot(callback.message)
+        await Create_states.start.set()
 
 
 
