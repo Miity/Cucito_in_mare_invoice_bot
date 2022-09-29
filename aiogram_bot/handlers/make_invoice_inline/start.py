@@ -28,9 +28,9 @@ async def step_answer(callback: types.CallbackQuery, state: FSMContext):
     elif callback.data == 'adress':
         await Create_states.level_2.set()
         await callback.message.answer('type client adress', reply_markup=types.ReplyKeyboardRemove())
-    elif callback.data == 'description':
+    elif callback.data == 'oggetto':
         await Create_states.level_3.set()
-        await callback.message.answer('description', reply_markup=types.ReplyKeyboardRemove())
+        await callback.message.answer('Scrivi oggetto', reply_markup=types.ReplyKeyboardRemove())
     elif callback.data == 'product':
         await Create_states.level_4.set()
         await callback.message.answer('type the name of product', reply_markup=types.ReplyKeyboardRemove())
@@ -50,7 +50,7 @@ async def step_answer(callback: types.CallbackQuery, state: FSMContext):
             await Create_states.start.set()
         except Exception as e:
             print('except: ', e)
-            if 'name' not in data or 'adress' not in data or 'description' not in data or 'products' not in data:
+            if 'name' not in data or 'adress' not in data or 'oggetto' not in data or 'products' not in data:
                 await callback.message.answer('need more info', reply_markup=types.ReplyKeyboardRemove())
                 await Create_states.start.set()
 
@@ -80,12 +80,12 @@ async def add_descript(message: types.Message,  state: FSMContext):
 
 
 @dp.message_handler(state=Create_states.level_3)
-async def add_descript(message: types.Message,  state: FSMContext):
-    await state.update_data(description = message.text)
+async def add_oggetto(message: types.Message,  state: FSMContext):
+    await state.update_data(oggetto = message.text)
     await Create_states.start.set()
     data = await state.get_data()
     print(data)
-    await message.answer("Description saved", reply_markup=add_inline_invoice_keyboard)
+    await message.answer("oggetto salvato", reply_markup=add_inline_invoice_keyboard)
 
 @dp.message_handler(state=Create_states.level_4)
 async def add_title_row(message: types.Message,  state: FSMContext):
