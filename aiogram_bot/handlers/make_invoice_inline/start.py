@@ -68,6 +68,7 @@ async def add_descript(message: types.Message,  state: FSMContext):
     await Create_states.start.set()
     data = await state.get_data()
     print(data)
+    await message.answer("Name saved", reply_markup=add_inline_invoice_keyboard)
 
 @dp.message_handler(state=Create_states.level_2)
 async def add_descript(message: types.Message,  state: FSMContext):
@@ -75,6 +76,7 @@ async def add_descript(message: types.Message,  state: FSMContext):
     await Create_states.start.set()
     data = await state.get_data()
     print(data)
+    await message.answer("Adress saved", reply_markup=add_inline_invoice_keyboard)
 
 
 @dp.message_handler(state=Create_states.level_3)
@@ -83,6 +85,7 @@ async def add_descript(message: types.Message,  state: FSMContext):
     await Create_states.start.set()
     data = await state.get_data()
     print(data)
+    await message.answer("Description saved", reply_markup=add_inline_invoice_keyboard)
 
 @dp.message_handler(state=Create_states.level_4)
 async def add_title_row(message: types.Message,  state: FSMContext):
@@ -116,3 +119,4 @@ async def add_price_row(message: types.Message,  state: FSMContext):
     await Create_states.start.set()
     data = await state.get_data()
     print(data)
+    await message.answer("Product saved", reply_markup=add_inline_invoice_keyboard)
