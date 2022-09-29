@@ -48,7 +48,8 @@ async def step_answer(callback: types.CallbackQuery, state: FSMContext):
             file = await make_pdf(data)
             await bot.send_document(callback.message.chat.id, document=file)
             await Create_states.start.set()
-        except:
+        except Exception as e:
+            print('except: ', e)
             if 'name' not in data or 'adress' not in data or 'description' not in data or 'products' not in data:
                 await callback.message.answer('need more info', reply_markup=types.ReplyKeyboardRemove())
                 await Create_states.start.set()
