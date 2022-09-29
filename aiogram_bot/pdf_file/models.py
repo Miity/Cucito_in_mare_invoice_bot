@@ -52,10 +52,15 @@ class PDF(FPDF):
         self.set_font(self.font, size=8)
         self.multi_cell(w=0,h=None, txt=foot_text_3)
     
-    def set_a(self, text):
+    def set_client_name(self, txt):
         self.set_xy(x=80,y=40)
         self.set_font(self.font, size=12)
-        self.cell(txt="A: " + text)
+        self.cell(txt="Clien Name: " + txt)
+
+    def set_client_adress(self, txt):
+        self.set_xy(x=80,y=45)
+        self.set_font(self.font, size=12)
+        self.cell(txt="Adress: " + txt)
         
     
     def set_oggetto(self, text):
@@ -110,6 +115,5 @@ class PDF(FPDF):
         self.multi_cell( w = self.pdf_w-10*2 , txt= txt, new_x=XPos.LEFT, new_y=YPos.NEXT)
 
         txt = 'Date: ' + str(datetime.datetime.now().strftime("%Y.%m.%d"))
-        print(txt)
         self.y += 5
         self.multi_cell(w= self.get_string_width(txt)+10 ,txt=txt, new_x=XPos.LEFT, new_y=YPos.NEXT)

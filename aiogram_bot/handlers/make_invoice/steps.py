@@ -28,31 +28,36 @@ async def start(message: types.Message, state: FSMContext):
 
 @dp.message_handler(state=Create_states.level_1)
 async def add_descript(message: types.Message,  state: FSMContext):
-    await state.update_data(client = message.text)
+    await state.update_data(name = message.text)
     await start(message, state)
 
 
 @dp.message_handler(state=Create_states.level_2)
 async def add_descript(message: types.Message,  state: FSMContext):
+    await state.update_data(adress = message.text)
+    await start(message, state)
+
+@dp.message_handler(state=Create_states.level_3)
+async def add_descript(message: types.Message,  state: FSMContext):
     await state.update_data(description = message.text)
     await start(message, state)
 
 
-@dp.message_handler(state=Create_states.level_3)
+@dp.message_handler(state=Create_states.level_4)
 async def add_title_row(message: types.Message,  state: FSMContext):
-    obj = {'txt': message.text, 'price': None}
+    product = {'txt': message.text, 'price': None}
 
     data = await state.get_data()
-    if 'objs' in data:
-        data['objs'].append(obj)
-        await state.update_data(objs = data['objs'])
+    if 'products' in data:
+        data['products'].append(product)
+        await state.update_data(products = data['products'])
     else:
-        await state.update_data(objs = [obj])
+        await state.update_data(products = [product])
 
     await message.answer('write the price')
-    await Create_states.level_4.set()
+    await Create_states.level_5.set()
 
-@dp.message_handler(state=Create_states.level_4)
+@dp.message_handler(state=Create_states.level_5)
 async def add_price_row(message: types.Message,  state: FSMContext):
     try:
         price = int(message.text)
@@ -64,7 +69,7 @@ async def add_price_row(message: types.Message,  state: FSMContext):
         await bot.get_updates()
     
     data = await state.get_data()
-    data['objs'][-1]['price'] = price
-    await state.update_data(objs = data['objs'])
+    data['products'][-1]['price'] = price
+    await state.update_data(products = data['products'])
 
     await start(message, state)
