@@ -2,7 +2,7 @@
 from cgitb import text
 from email import message
 from aiogram import types
-from loader import dp
+from loader import dp, bot
 from keyboards.inline.keyboards import add_inline_invoice_keyboard
 
 from aiogram.dispatcher import FSMContext
@@ -45,9 +45,8 @@ async def step_answer(callback: types.CallbackQuery, state: FSMContext):
         try:
             await callback.message.answer('wait', reply_markup=types.ReplyKeyboardRemove())
             from .utils import make_pdf
-            from loader import bot
-            file = await make_pdf(state)
-            await bot.send_document(callback.message.chat.id,document=file)
+            file = await make_pdf(data)
+            await bot.send_document(callback.message.chat.id, document=file)
             await start(callback.message, state)
         except:
             if 'name' not in data or 'adress' not in data or 'description' not in data or 'products' not in data:

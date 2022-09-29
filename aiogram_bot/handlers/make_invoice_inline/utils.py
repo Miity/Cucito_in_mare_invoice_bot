@@ -26,11 +26,9 @@ async def show_price_info(message: types.Message, state: FSMContext):
         await message.answer(txt)
 
 
-async def make_pdf(state: FSMContext):
+async def make_pdf(data):
     
     from pdf_file.models import PDF
-
-    data = await state.get_data()
 
     f = PDF()
     f.add_page()
