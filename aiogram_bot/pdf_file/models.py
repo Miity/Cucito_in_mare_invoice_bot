@@ -1,7 +1,7 @@
 import os
 from fpdf import FPDF
 from fpdf.enums import XPos,YPos
-
+import datetime
 
 
 class PDF(FPDF):
@@ -10,6 +10,7 @@ class PDF(FPDF):
     pdf_w=210
     pdf_h=297
     font="helvetica"
+    filename = 'file'
 
     def lines(self):
         self.set_line_width(0.0)
@@ -64,7 +65,7 @@ class PDF(FPDF):
         num = 1
         
         for obj in price_list:
-            if self.y >= self.pdf_h - 60:
+            if self.y >= self.pdf_h - 100:
                 self.add_page()
                 self.x = 10
             txt = f'{num}. ' + obj['txt']
@@ -100,3 +101,8 @@ class PDF(FPDF):
         self.y += 2
         self.set_font("helvetica", size=12)
         self.multi_cell( w = self.pdf_w-10*2 , txt= txt, new_x=XPos.LEFT, new_y=YPos.NEXT)
+
+        txt = 'Date: ' + str(datetime.datetime.now().strftime("%Y.%m.%d"))
+        print(txt)
+        self.y += 5
+        self.multi_cell(w= self.get_string_width(txt)+10 ,txt=txt, new_x=XPos.LEFT, new_y=YPos.NEXT)

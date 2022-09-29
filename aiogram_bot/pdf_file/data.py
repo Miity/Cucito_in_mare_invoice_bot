@@ -1,9 +1,0 @@
-price_list = [
-    {'txt':'Rifacimento tendalino di poppa con ancoraggio tramite canalina montata su hardtopa inferitura scorrevole. Predisposizione installazione rete filtro di poppa e laterali con cerniere. Il lavoro sarà realizzato con telo Resinato Sunbrella Plus', 'price': 1500},
-    {'txt':'Realizzazione nr. 1 chiusura di poppa e nr. 2 laterali con rete filtro Sunbrella. Ancoraggio a battagliola o su murata. Il lavoro sarà realizzato con 2 aperture richiudubili a cerniera in corrispondenza delle 2 risalite di poppa','price':1650},
-    {'txt':'Cuscineria di prua (partecentrale) costituita da nr. 2 cuscini con cellula chiusa estrato easydry mobido. Il cuscino a semicerchio di altezza 9-10 cm mentre il cuscino verso prua avra un altezza di 6cm','price':300},
-    {'txt':'Rifacimento tendalino di poppa con ancoraggio tramite canalina montata su hardtopa inferitura scorrevole. Predisposizione installazione rete filtro di poppa e laterali con cerniere. Il lavoro sarà realizzato con telo Resinato Sunbrella Plus', 'price': 1500},
-    {'txt':'Realizzazione nr. 1 chiusura di poppa e nr. 2 laterali con rete filtro Sunbrella. Ancoraggio a battagliola o su murata. Il lavoro sarà realizzato con 2 aperture richiudubili a cerniera in corrispondenza delle 2 risalite di poppa','price':1650},
-    {'txt':'Realizzazione nr. 1 chiusura di poppa e nr. 2 laterali con rete filtro Sunbrella. Ancoraggio a battagliola o su murata. Il lavoro sarà realizzato con 2 aperture richiudubili a cerniera in corrispondenza delle 2 risalite di poppa','price':1650},
-    {'txt':'Cuscineria di prua (partecentrale) costituita da nr. 2 cuscini con cellula chiusa estrato easydry mobido. Il cuscino a semicerchio di altezza 9-10 cm mentre il cuscino verso prua avra un altezza di 6cm','price':300},
-]
