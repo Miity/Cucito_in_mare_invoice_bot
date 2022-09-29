@@ -4,11 +4,9 @@ reset = KeyboardButton('reset')
 
 
 create_inv =  KeyboardButton('create new invoice')
-inline = KeyboardButton('/inline')
 
 start_keyboard = ReplyKeyboardMarkup([
     [create_inv],
-    [inline]
 ],resize_keyboard=True, input_field_placeholder='chose button')
 
 

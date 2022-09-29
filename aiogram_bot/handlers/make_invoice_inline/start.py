@@ -1,4 +1,6 @@
 
+from cgitb import text
+from email import message
 from aiogram import types
 from loader import dp
 from keyboards.inline.keyboards import add_inline_invoice_keyboard
@@ -7,7 +9,7 @@ from aiogram.dispatcher import FSMContext
 from states.create_pdf import Create_states
 
 
-@dp.message_handler(commands='inline')
+@dp.message_handler(text='create new invoice')
 async def start(message: types.Message,  state: FSMContext):
     await Create_states.start.set()
     await message.answer('wait', reply_markup= types.ReplyKeyboardRemove())
