@@ -105,18 +105,17 @@ async def add_title_row(message: types.Message,  state: FSMContext):
 async def add_price_row(message: types.Message,  state: FSMContext):
     try:
         price = int(message.text)
+        data = await state.get_data()
+        data['products'][-1]['price'] = price
+        await state.update_data(products = data['products'])
+
+        await Create_states.start.set()
+        data = await state.get_data()
+        print(data)
+        await message.answer("Product saved", reply_markup=add_inline_invoice_keyboard)
+        
     except:
         await message.answer('errore, write the number')
         await message.answer('write the price')
         await Create_states.level_4.set()
-        from loader import bot
-        await bot.get_updates()
     
-    data = await state.get_data()
-    data['products'][-1]['price'] = price
-    await state.update_data(products = data['products'])
-
-    await Create_states.start.set()
-    data = await state.get_data()
-    print(data)
-    await message.answer("Product saved", reply_markup=add_inline_invoice_keyboard)
