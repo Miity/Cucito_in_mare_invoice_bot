@@ -1,7 +1,7 @@
 import logging
 from aiogram import Dispatcher
-from loader import bot
-from data.config import admins_id
+from aiogram_bot.loader import bot
+from aiogram_bot.data.config import admins_id
 
 logging.basicConfig(level=logging.INFO)
 dp = Dispatcher(bot)

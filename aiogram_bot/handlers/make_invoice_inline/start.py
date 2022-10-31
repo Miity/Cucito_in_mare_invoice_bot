@@ -1,12 +1,8 @@
-
-from cgitb import text
-from email import message
 from aiogram import types
-from loader import dp, bot
-from keyboards.inline.keyboards import add_inline_invoice_keyboard
-
 from aiogram.dispatcher import FSMContext
-from states.create_pdf import Create_states
+from aiogram_bot.loader import dp, bot
+from aiogram_bot.keyboards.inline.keyboards import add_inline_invoice_keyboard
+from aiogram_bot.states.create_pdf import Create_states
 
 
 @dp.message_handler(text='create new invoice')
@@ -15,8 +11,7 @@ async def start(message: types.Message,  state: FSMContext):
     await message.answer('wait', reply_markup= types.ReplyKeyboardRemove())
     await message.answer("your keyboard", reply_markup=add_inline_invoice_keyboard)
     data = await state.get_data()
-    print(data)
-
+    print('Saved data: ' + str(data))
 
 
 
@@ -101,21 +96,20 @@ async def add_title_row(message: types.Message,  state: FSMContext):
     await message.answer('write the price')
     await Create_states.level_5.set()
 
+
+# gotta be digit
+@dp.message_handler(lambda message: not message.text.isdigit(), state=Create_states.level_5)
+async def process_age_invalid(message: types.Message):
+    return await message.reply("Price gotta be a number.\n What price is it? (digits only)")
+
 @dp.message_handler(state=Create_states.level_5)
 async def add_price_row(message: types.Message,  state: FSMContext):
-    try:
-        price = int(message.text)
-        data = await state.get_data()
-        data['products'][-1]['price'] = price
-        await state.update_data(products = data['products'])
+    price = int(message.text)
+    data = await state.get_data()
+    data['products'][-1]['price'] = price
+    await state.update_data(products = data['products'])
 
-        await Create_states.start.set()
-        data = await state.get_data()
-        print(data)
-        await message.answer("Product saved", reply_markup=add_inline_invoice_keyboard)
-        
-    except:
-        await message.answer('errore, write the number')
-        await message.answer('write the price')
-        await Create_states.level_4.set()
-    
+    await Create_states.start.set()
+    data = await state.get_data()
+    print(data)
+    await message.answer("Product and price saved", reply_markup=add_inline_invoice_keyboard)

@@ -1,7 +1,6 @@
 from aiogram import types
-from loader import dp
-
-from keyboards.default.keyboards import start_keyboard
+from aiogram_bot.loader import dp
+from aiogram_bot.keyboards.default.keyboards import start_keyboard
 
 
 @dp.message_handler(commands=['start'])
